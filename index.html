@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Destination</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #6a11cb, #2575fc, #0099ff, #4facfe);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 900px;
+            text-align: center;
+            padding: 2rem;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            animation: slideUp 1.2s ease-out;
+        }
+        
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s, box-shadow 0.4s;
+            perspective: 1000px;
+        }
+        
+        .btn-1 {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        }
+        
+        .btn-2 {
+            background: linear-gradient(135deg, #38ef7d, #11998e);
+        }
+        
+        .btn:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-content {
+            z-index: 2;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .btn-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            animation: textGlow 2s infinite alternate;
+        }
+        
+        .btn-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-highlight {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            animation: pulse 2s infinite;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            z-index: 1;
+        }
+        
+        .btn:hover::before {
+            transform: rotate(45deg) translate(20%, 20%);
+        }
+        
+        .animated-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            overflow: hidden;
+            border-right: 2px solid rgba(255, 255, 255, 0.75);
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        .countdown {
+            margin-top: 2.5rem;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-block;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 2s ease-out;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes textGlow {
+            from { text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); }
+            to { text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.4); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: rgba(255, 255, 255, 0.75); }
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 280px;
+                height: 280px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .btn-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes" id="shapes"></div>
+    
+    <div class="container">
+        <h1>Choose your location</h1>
+        <p class="animated-text">Just clink and go ahead.........................</p>
+        
+        <div class="buttons-container">
+            <a href="#" class="btn btn-1" id="btn1">
+                <div class="btn-content">
+                    <div class="btn-title">SLIP 1</div>
+                    <div class="btn-text">A PAYMENT SLIP WITHOUT STAMP AND SEAL OF COMPANY</div>
+                    <div class="btn-highlight">BFS.COM SERVER </div>
+                </div>
+            </a>
+            
+            <a href="#" class="btn btn-2" id="btn2">
+                <div class="btn-content">
+                    <div class="btn-title">SLIP 2</div>
+                    <div class="btn-text">A PAYMENT SLIP WITH STAMP AND SEAL OF COMPANY</div>
+                    <div class="btn-highlight">BFS.COM MATCH</div>
+                </div>
+            </a>
+        </div>
+        
+        <div class="countdown">
+            <span>Redirecting in <span id="countdown">15</span> seconds</span>
+        </div>
+    </div>
+
+    <script>
+        // Create floating shapes
+        function createShapes() {
+            const shapesContainer = document.getElementById('shapes');
+            const shapeCount = 20;
+            
+            for (let i = 0; i < shapeCount; i++) {
+                const shape = document.createElement('div');
+                shape.classList.add('shape');
+                
+                // Random properties
+                const size = Math.random() * 100 + 20;
+                const posX = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 10 + 15;
+                
+                shape.style.width = `${size}px`;
+                shape.style.height = `${size}px`;
+                shape.style.left = `${posX}%`;
+                shape.style.animationDelay = `${delay}s`;
+                shape.style.animationDuration = `${duration}s`;
+                
+                shapesContainer.appendChild(shape);
+            }
+        }
+        
+        // Countdown timer
+        function startCountdown() {
+            let timeLeft = 15;
+            const countdownElement = document.getElementById('countdown');
+            const countdownInterval = setInterval(() => {
+                timeLeft--;
+                countdownElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    // Redirect to a default page if no selection is made
+                    window.location.href = 'https://default-page.example.com';
+                }
+            }, 1000);
+        }
+        
+        // Button hover effects
+        function setupButtonEffects() {
+            const buttons = document.querySelectorAll('.btn');
+            
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', function(e) {
+                    const x = e.offsetX;
+                    const y = e.offsetY;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.style.position = 'absolute';
+                    ripple.style.width = '0px';
+                    ripple.style.height = '0px';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.style.transform = 'translate(-50%, -50%)';
+                    ripple.style.animation = 'ripple-effect 0.6s linear';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        }
+        
+        // Set up redirects
+        function setupRedirects() {
+            document.getElementById('btn1').addEventListener('click', function(e) {
+                e.preventDefault();
+                // Add a nice transition effect before redirecting
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    window.location.href = 'slip1.html';
+                }, 500);
+            });
+            
+            document.getElementById('btn2').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    window.location.href = 'slip2.html';
+                }, 500);
+            });
+        }
+        
+        // Add CSS for ripple effect
+        function addRippleAnimation() {
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple-effect {
+                    0% {
+                        width: 0px;
+                        height: 0px;
+                        opacity: 0.5;
+                    }
+                    100% {
+                        width: 300px;
+                        height: 300px;
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Initialize everything when the page loads
+        window.onload = function() {
+            createShapes();
+            startCountdown();
+            addRippleAnimation();
+            setupButtonEffects();
+            setupRedirects();
+        };
+    </script>
+</body>
+</html>
